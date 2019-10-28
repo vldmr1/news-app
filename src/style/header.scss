@@ -1,0 +1,25 @@
+@import "@material/list/mdc-list";
+@import "@material/menu-surface/mdc-menu-surface";
+@import "@material/menu/mdc-menu";
+@import "@material/select/mdc-select";
+@import "@material/select/icon/mdc-select-icon";
+
+
+.source-dropdown {
+  @include mdc-select-focused-label-color(#e3b04b);
+  @include mdc-select-focused-bottom-line-color(#e3b04b);
+}
+
+.selected-text {
+  font-size: 1.6rem;
+  padding: 2.7rem 3rem;
+}
+
+.select-label {
+  margin-bottom: 0.5rem;
+}
+
+.dropdown-icon {
+  @include mdc-select-icon-color(#f1d6ab);
+  color: #f1d6ab;
+}

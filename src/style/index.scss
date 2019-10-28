@@ -1,0 +1,15 @@
+@import 'material-style-overrides.scss';
+
+@import './header.scss';
+@import './reset.scss';
+@import './NewsCard.scss';
+
+@import '@material/layout-grid/mdc-layout-grid';
+@import "@material/card/mdc-card";
+@import '@material/typography/mdc-typography';
+
+.central-wrapper {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
