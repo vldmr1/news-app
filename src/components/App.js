@@ -11,7 +11,7 @@ export default class NewsApp {
       this.sourceData = await this.getSourcesData().catch(console.log);
       renderSourceSelector(this.sourceData);
     } catch {
-      document.querySelector('.select-label').innerText = 'Unable to process Source Data';
+      document.querySelector('.articles').innerText = 'Unable to process Source Data';
       return;
     }
 
