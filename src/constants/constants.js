@@ -21,8 +21,6 @@ const MDC_CARD_ACTION_BUTTON = 'mdc-card__action--button';
 const MDC_BUTTON_UNELEVATED = 'mdc-button--unelevated';
 const MDC_TYPOGRAPHY_HEADLINE_5 = 'mdc-typography--headline5';
 
-
-
 export const httpRequestConstants = {
   API_KEY,
   SOURCES_URL,

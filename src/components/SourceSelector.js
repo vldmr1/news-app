@@ -6,6 +6,13 @@ export default class SourceSelector {
   }
 
   render = () => {
+    try {
+      if (!this.sourceData) throw new Error('Unable to process Source Data');
+    } catch(err) {
+      document.querySelector('.select-label').innerText = err;
+      return;
+    }
+
     const {
       MDC_LIST_ITEM,
       MDC_TYPOGRAPHY,

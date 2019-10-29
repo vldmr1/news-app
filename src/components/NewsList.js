@@ -6,7 +6,14 @@ export default class NewsList {
   }
 
   render = () => {
-    const articleSection = document.querySelector('.articles')
+    const articleSection = document.querySelector('.articles');
+
+    try {
+      if (!this.articlesData) throw new Error('Unable to process Articles Data');
+    } catch(err) {
+      articleSection.innerText = 'Unable to process Articles Data';
+      return;
+    }
 
     this.articlesData.forEach(({
       author,

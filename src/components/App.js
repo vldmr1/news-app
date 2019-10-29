@@ -8,7 +8,7 @@ import '../style/index.scss';
 
 export default class NewsApp {
   init = async () => {
-    this.sourceData = await this.getSourcesData();
+    this.sourceData = await this.getSourcesData().catch(console.log);
     this.sourceSelector = new SourceSelector(this.sourceData);
     this.sourceSelector.render();
     this.addSelectorListener();
@@ -29,12 +29,17 @@ export default class NewsApp {
   }
 
   sourceChangeHandler = async ({ detail: { value } }) => {
+    if (this.currentSource === value) {
+      return;
+    }
+
+    this.currentSource = value;
+
     const articleSection = document.querySelector('.articles');
     articleSection.innerHTML = '';
 
     const articleId = this.sourceData[value];
-    const articlesData = await getArticlesData(articleId);
-    console.log(articlesData);
+    const articlesData = await getArticlesData(articleId).catch(console.log);
     const sourceList = new NewsList(articlesData);
     sourceList.render();
   }
