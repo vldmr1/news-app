@@ -37,7 +37,7 @@ export default class NewsCard {
           <div class="${MDC_CARD_MEDIA_CONTENT} news-card-content">
             <div>
               <h2 class="${MDC_TYPOGRAPHY} ${MDC_TYPOGRAPHY_HEADLINE_4} news-card-title">${this.title}</h2>
-              <h3 class="${MDC_TYPOGRAPHY} ${MDC_TYPOGRAPHY_SUBTITLE_1} news-card-author">${this.author ? `by ${this.author}` : ''}</h3>
+              ${this.author ? `<h3 class="${MDC_TYPOGRAPHY} ${MDC_TYPOGRAPHY_SUBTITLE_1} news-card-author">by ${this.author}</h3>` : ''}
             </div>
           </div>
         </div>
