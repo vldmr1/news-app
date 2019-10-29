@@ -1,22 +1,18 @@
-import NewsCard from "./NewsCard";
+import renderNewsCard from "./NewsCard";
 
-export default class NewsList {
-  constructor(articlesData) {
-    this.articlesData = articlesData;
-  }
+const renderNewsList = (articlesData) => {
+  const articleSection = document.querySelector('.articles');
 
-  render = () => {
-    const articleSection = document.querySelector('.articles')
-
-    this.articlesData.forEach(({
-      author,
-      title,
-      description,
-      url,
-      urlToImage
-    }) => {
-      const newsCard = new NewsCard(author, title, description, url, urlToImage).render();
-      articleSection.appendChild(newsCard);
-    })
-  }
+  articlesData.forEach(({
+    author,
+    title,
+    description,
+    url,
+    urlToImage
+  }) => {
+    const newsCard = renderNewsCard(author, title, description, url, urlToImage);
+    articleSection.appendChild(newsCard);
+  })
 }
+
+export default renderNewsList;

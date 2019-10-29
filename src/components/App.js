@@ -1,16 +1,20 @@
 import { MDCSelect } from '@material/select';
-// import { MDCRipple } from '@material/ripple';
 
 import { getListOfSources, getArticlesData } from '../services/data-service';
-import SourceSelector from './SourceSelector';
-import NewsList from './NewsList';
+import renderSourceSelector from './SourceSelector';
+import renderNewsList from './NewsList';
 import '../style/index.scss';
 
 export default class NewsApp {
   init = async () => {
-    this.sourceData = await this.getSourcesData();
-    this.sourceSelector = new SourceSelector(this.sourceData);
-    this.sourceSelector.render();
+    try {
+      this.sourceData = await this.getSourcesData().catch(console.log);
+      renderSourceSelector(this.sourceData);
+    } catch {
+      document.querySelector('.select-label').innerText = 'Unable to process Source Data';
+      return;
+    }
+
     this.addSelectorListener();
   }
 
@@ -29,13 +33,21 @@ export default class NewsApp {
   }
 
   sourceChangeHandler = async ({ detail: { value } }) => {
+    if (this.currentSource === value) {
+      return;
+    }
+
+    this.currentSource = value;
+
     const articleSection = document.querySelector('.articles');
     articleSection.innerHTML = '';
-
     const articleId = this.sourceData[value];
-    const articlesData = await getArticlesData(articleId);
-    console.log(articlesData);
-    const sourceList = new NewsList(articlesData);
-    sourceList.render();
+
+    try {
+      const articlesData = await getArticlesData(articleId).catch(console.log);
+      renderNewsList(articlesData);
+    } catch {
+      articleSection.innerText = 'Unable to process Articles Data';
+    }
   }
 }

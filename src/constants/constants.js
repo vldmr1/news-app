@@ -19,8 +19,7 @@ const MDC_TYPOGRAPHY_BODY_1 = 'mdc-typography--body1';
 const MDC_BUTTON = 'mdc-button';
 const MDC_CARD_ACTION_BUTTON = 'mdc-card__action--button';
 const MDC_BUTTON_UNELEVATED = 'mdc-button--unelevated';
-
-
+const MDC_TYPOGRAPHY_HEADLINE_5 = 'mdc-typography--headline5';
 
 export const httpRequestConstants = {
   API_KEY,
@@ -45,4 +44,5 @@ export const materialUiClasses = {
   MDC_BUTTON,
   MDC_CARD_ACTION_BUTTON,
   MDC_BUTTON_UNELEVATED,
+  MDC_TYPOGRAPHY_HEADLINE_5
 };

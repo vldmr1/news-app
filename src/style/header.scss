@@ -16,10 +16,15 @@
 }
 
 .select-label {
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
 }
 
 .dropdown-icon {
   @include mdc-select-icon-color(#f1d6ab);
   color: #f1d6ab;
+}
+
+.source-selector {
+  width: 35rem;
 }
