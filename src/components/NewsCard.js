@@ -28,7 +28,7 @@ const renderNewsCard = (author, title, description, url, urlToImage) => {
         <div class="${MDC_CARD_MEDIA_CONTENT} news-card-content">
           <div>
             <h2 class="${MDC_TYPOGRAPHY} ${MDC_TYPOGRAPHY_HEADLINE_4} news-card-title">${title}</h2>
-            ${author && author.includes('http') ? `<h3 class="${MDC_TYPOGRAPHY} ${MDC_TYPOGRAPHY_SUBTITLE_1} news-card-author">by ${author}</h3>` : ''}
+            ${author && !author.includes('http') ? `<h3 class="${MDC_TYPOGRAPHY} ${MDC_TYPOGRAPHY_SUBTITLE_1} news-card-author">by ${author}</h3>` : ''}
           </div>
         </div>
       </div>
