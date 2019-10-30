@@ -1,4 +1,5 @@
 @import 'material-style-overrides.scss';
+@import 'footer.scss';
 
 @import './header.scss';
 @import './reset.scss';
@@ -8,8 +9,21 @@
 @import "@material/card/mdc-card";
 @import '@material/typography/mdc-typography';
 
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .central-wrapper {
   max-width: 120rem;
   margin: 0 auto;
+}
+
+.page-main {
+  flex: 1 0 auto;
 }
 
