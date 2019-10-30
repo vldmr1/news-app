@@ -1,17 +1,21 @@
 import { MDCSelect } from '@material/select';
 
+import { errorMessages } from '../constants/constants';
 import { getListOfSources, getArticlesData } from '../services/data-service';
 import renderSourceSelector from './SourceSelector';
 import renderNewsList from './NewsList';
+import renderErrorMessage from './ErrorMessage';
 import '../style/index.scss';
 
 export default class NewsApp {
   init = async () => {
+    const { ERROR_SOURCES } = errorMessages;
+
     try {
       this.sourceData = await this.getSourcesData().catch(console.log);
       renderSourceSelector(this.sourceData);
     } catch {
-      document.querySelector('.articles').innerText = 'Unable to process Source Data';
+      renderErrorMessage(ERROR_SOURCES);
       return;
     }
 
@@ -33,6 +37,8 @@ export default class NewsApp {
   }
 
   sourceChangeHandler = async ({ detail: { value } }) => {
+    const { ERROR_ARTICLES } = errorMessages;
+
     if (this.currentSource === value) {
       return;
     }
@@ -47,7 +53,7 @@ export default class NewsApp {
       const articlesData = await getArticlesData(articleId).catch(console.log);
       renderNewsList(articlesData);
     } catch {
-      articleSection.innerText = 'Unable to process Articles Data';
+      renderErrorMessage(ERROR_ARTICLES);
     }
   }
 }
