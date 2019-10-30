@@ -1,5 +1,5 @@
 const API_KEY = 'ae5339fbacb349d0b8f0f88cd3e56754';
-const SOURCES_URL = 'https://newsapi.org/v1/source';
+const SOURCES_URL = 'https://newsapi.org/v1/sources';
 const ARTICLES_URL = 'https://newsapi.org/v1/articles?source=';
 
 // MaterialUI Class Names
