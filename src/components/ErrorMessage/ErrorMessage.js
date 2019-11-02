@@ -1,4 +1,4 @@
-import { materialUiClasses } from '../constants/constants';
+import { materialUiClasses } from '../../constants/constants';
 
 const renderErrorMessage = (messageText) => {
   const {

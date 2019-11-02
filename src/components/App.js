@@ -4,7 +4,7 @@ import { errorMessages } from '../constants/constants';
 import { getListOfSources, getArticlesData } from '../services/data-service';
 import renderSourceSelector from './SourceSelector';
 import renderNewsList from './NewsList';
-import renderErrorMessage from './ErrorMessage';
+// import renderErrorMessage from './ErrorMessage';
 import '../style/index.scss';
 
 export default class NewsApp {
@@ -15,7 +15,7 @@ export default class NewsApp {
       this.sourceData = await this.getSourcesData().catch(console.log);
       renderSourceSelector(this.sourceData);
     } catch {
-      renderErrorMessage(ERROR_SOURCES);
+      this.errorHandler(ERROR_SOURCES);
       return;
     }
 
@@ -53,7 +53,14 @@ export default class NewsApp {
       const articlesData = await getArticlesData(articleId).catch(console.log);
       renderNewsList(articlesData);
     } catch {
-      renderErrorMessage(ERROR_ARTICLES);
+      this.errorHandler(ERROR_ARTICLES);
     }
+  }
+
+  errorHandler = (errorMessage) => {
+    import('./ErrorMessage/ErrorMessage').then(module => {
+      const renderErrorMessage = module.default;
+      renderErrorMessage(errorMessage);
+    });
   }
 }

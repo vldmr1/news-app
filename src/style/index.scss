@@ -16,22 +16,19 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+
+  .central-wrapper {
+    max-width: 120rem;
+    margin: 0 auto;
+  }
+
+  .page-main {
+    flex: 1 0 auto;
+  }
+
+  .error-container {
+    padding-top: 20rem;
+  }
 }
 
-.central-wrapper {
-  max-width: 120rem;
-  margin: 0 auto;
-}
 
-.page-main {
-  flex: 1 0 auto;
-}
-
-.error-message {
-  color: rgb(219, 91, 91);
-  text-align: center;
-}
-
-.error-container {
-  padding-top: 20rem;
-}
