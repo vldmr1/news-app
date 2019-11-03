@@ -4,7 +4,6 @@ import { errorMessages } from '../constants/constants';
 import { getListOfSources, getArticlesData } from '../services/data-service';
 import renderSourceSelector from './SourceSelector';
 import renderNewsList from './NewsList';
-// import renderErrorMessage from './ErrorMessage';
 import '../style/index.scss';
 
 export default class NewsApp {
@@ -60,8 +59,9 @@ export default class NewsApp {
 
   errorHandler = (errorMessage) => {
     import('./ErrorMessage/ErrorMessage').then(module => {
-      const renderErrorMessage = module.default;
-      renderErrorMessage(errorMessage);
+      const ErrorMessage = module.default;
+      const err = new ErrorMessage();
+      err.render(errorMessage);
     });
   }
 }
