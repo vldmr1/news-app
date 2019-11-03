@@ -52,7 +52,8 @@ export default class NewsApp {
     try {
       const articlesData = await getArticlesData(articleId).catch(console.log);
       renderNewsList(articlesData);
-    } catch {
+    } catch(err) {
+      console.log(err);
       this.errorHandler(ERROR_ARTICLES);
     }
   }

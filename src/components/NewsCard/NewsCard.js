@@ -1,6 +1,6 @@
-import { materialUiClasses } from '../constants/constants';
+import { materialUiClasses } from '../../constants/constants';
 
-const renderNewsCard = (author, title, description, url, urlToImage) => {
+const renderNewsCard = ({ author, title, description, url, urlToImage }) => {
   const {
     MDC_CARD,
     MDC_CARD_ACTION,

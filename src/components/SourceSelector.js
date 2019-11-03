@@ -6,7 +6,9 @@ const renderSourceSelector = (sourceData) => {
     MDC_TYPOGRAPHY,
     MDC_TYPOGRAPHY_HEADLINE_5,
   } = materialUiClasses;
+
   const sourceDropDown = document.querySelector('.source-selector');
+  const listFragment = document.createDocumentFragment();
   const sourceNames = Object.keys(sourceData);
 
   sourceNames.forEach(name => {
@@ -15,8 +17,10 @@ const renderSourceSelector = (sourceData) => {
     li.classList.add(MDC_LIST_ITEM, MDC_TYPOGRAPHY, MDC_TYPOGRAPHY_HEADLINE_5);
     li.innerText = name;
 
-    sourceDropDown.appendChild(li);
+    listFragment.appendChild(li);
   });
+
+  sourceDropDown.appendChild(listFragment);
 }
 
 export default renderSourceSelector;

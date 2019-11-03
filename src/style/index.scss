@@ -1,9 +1,9 @@
 @import 'material-style-overrides.scss';
-@import 'footer.scss';
-
+@import '../components/NewsCard/NewsCard.scss';
+@import '../components/ErrorMessage/error.scss';
+@import './footer.scss';
 @import './header.scss';
 @import './reset.scss';
-@import './NewsCard.scss';
 
 @import '@material/layout-grid/mdc-layout-grid';
 @import "@material/card/mdc-card";
