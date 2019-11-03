@@ -1,18 +1,15 @@
-import renderNewsCard from "./NewsCard";
+import renderNewsCard from "./NewsCard/NewsCard";
 
 const renderNewsList = (articlesData) => {
   const articleSection = document.querySelector('.articles');
+  const listFragment = document.createDocumentFragment();
 
-  articlesData.forEach(({
-    author,
-    title,
-    description,
-    url,
-    urlToImage
-  }) => {
-    const newsCard = renderNewsCard(author, title, description, url, urlToImage);
-    articleSection.appendChild(newsCard);
-  })
+  articlesData.forEach(article => {
+    const newsCard = renderNewsCard(article);
+    listFragment.appendChild(newsCard);
+  });
+
+  articleSection.appendChild(listFragment);
 }
 
 export default renderNewsList;

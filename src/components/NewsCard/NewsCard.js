@@ -1,23 +1,22 @@
-import { materialUiClasses } from '../constants/constants';
+import {
+  MDC_CARD,
+  MDC_CARD_ACTION,
+  MDC_CARD_ACTIONS,
+  MDC_CARD_ACTION_BUTTONS,
+  MDC_CARD_PRIMARY_ACTION,
+  MDC_CARD_MEDIA,
+  MDC_CARD_MEDIA_CONTENT,
+  MDC_CARD_MEDIA_16_9,
+  MDC_TYPOGRAPHY,
+  MDC_TYPOGRAPHY_HEADLINE_4,
+  MDC_TYPOGRAPHY_SUBTITLE_1,
+  MDC_TYPOGRAPHY_BODY_1,
+  MDC_BUTTON,
+  MDC_CARD_ACTION_BUTTON,
+  MDC_BUTTON_UNELEVATED,
+} from '../../constants/constants';
 
-const renderNewsCard = (author, title, description, url, urlToImage) => {
-  const {
-    MDC_CARD,
-    MDC_CARD_ACTION,
-    MDC_CARD_ACTIONS,
-    MDC_CARD_ACTION_BUTTONS,
-    MDC_CARD_PRIMARY_ACTION,
-    MDC_CARD_MEDIA,
-    MDC_CARD_MEDIA_CONTENT,
-    MDC_CARD_MEDIA_16_9,
-    MDC_TYPOGRAPHY,
-    MDC_TYPOGRAPHY_HEADLINE_4,
-    MDC_TYPOGRAPHY_SUBTITLE_1,
-    MDC_TYPOGRAPHY_BODY_1,
-    MDC_BUTTON,
-    MDC_CARD_ACTION_BUTTON,
-    MDC_BUTTON_UNELEVATED,
-  } = materialUiClasses;
+const renderNewsCard = ({ author, title, description, url, urlToImage }) => {
 
   const card = document.createElement('div');
   card.classList.add(MDC_CARD, 'mdc-layout-grid__cell', 'news-card');

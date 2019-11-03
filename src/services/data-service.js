@@ -1,20 +1,12 @@
-import { httpRequestConstants } from '../constants/constants';
+import RequestFactory from './requests/RequestFactory';
+import urlBuilder from '../utils/url-builder';
 
-export const getListOfSources = async () => {
-  const { SOURCES_URL, API_KEY } = httpRequestConstants;
+export const fetchApiData = async({ url, method }) => {
+  const urlString = urlBuilder(url);
+  const request = new RequestFactory().createRequest(urlString, method);
 
-  const response = await fetch(`${SOURCES_URL}?apiKey=${API_KEY}`);
+  const response = await fetch(...request);
   const data = await response.json();
 
-  return data.sources;
+  return data;
 }
-
-export const getArticlesData = async (sourceName) => {
-  const { ARTICLES_URL, API_KEY } = httpRequestConstants;
-
-  const response = await fetch(`${ARTICLES_URL}${sourceName}&apiKey=${API_KEY}`);
-  const data = await response.json();
-
-  return data.articles;
-}
-

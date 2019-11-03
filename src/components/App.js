@@ -1,6 +1,7 @@
 import { MDCSelect } from '@material/select';
 
-import { getListOfSources, getArticlesData } from '../services/data-service';
+import { ERROR_SOURCES, ERROR_ARTICLES, BASE_URL, API_KEY, GET } from '../constants/constants';
+import { getListOfSources, getArticlesData, fetchApiData } from '../services/data-service';
 import renderSourceSelector from './SourceSelector';
 import renderNewsList from './NewsList';
 import '../style/index.scss';
@@ -11,7 +12,7 @@ export default class NewsApp {
       this.sourceData = await this.getSourcesData().catch(console.log);
       renderSourceSelector(this.sourceData);
     } catch {
-      document.querySelector('.articles').innerText = 'Unable to process Source Data';
+      this.errorHandler(ERROR_SOURCES);
       return;
     }
 
@@ -19,9 +20,20 @@ export default class NewsApp {
   }
 
   getSourcesData = async () => {
-    const sources = await getListOfSources();
+    const apiQuery = {
+      method: GET,
+      url: {
+        baseUrl: BASE_URL,
+        paths: ['/sources'],
+        params: {
+          apiKey: API_KEY,
+        },
+      }
+    }
 
-    return sources.reduce((result, { name, id }) => {
+    const data = await fetchApiData(apiQuery);
+
+    return data.sources.reduce((result, { name, id }) => {
       result[name] = id;
       return result;
     } , {});
@@ -38,16 +50,37 @@ export default class NewsApp {
     }
 
     this.currentSource = value;
+    const articleId = this.sourceData[value];
 
     const articleSection = document.querySelector('.articles');
     articleSection.innerHTML = '';
-    const articleId = this.sourceData[value];
+
+    const apiQuery = {
+      method: GET,
+      url: {
+        baseUrl: BASE_URL,
+        paths: ['/articles'],
+        params: {
+          apiKey: API_KEY,
+          source: articleId,
+        },
+      },
+    }
 
     try {
-      const articlesData = await getArticlesData(articleId).catch(console.log);
-      renderNewsList(articlesData);
-    } catch {
-      articleSection.innerText = 'Unable to process Articles Data';
+      const data = await fetchApiData(apiQuery).catch(console.log);
+      renderNewsList(data.articles);
+    } catch(err) {
+      console.log(err);
+      this.errorHandler(ERROR_ARTICLES);
     }
+  }
+
+  errorHandler = (errorMessage) => {
+    import(/* webpackChunkName: "error" */'./ErrorMessage/ErrorMessage').then(module => {
+      const ErrorMessage = module.default;
+      const err = new ErrorMessage();
+      err.render(errorMessage);
+    });
   }
 }
