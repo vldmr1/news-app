@@ -1,5 +1,9 @@
-import { materialUiClasses } from '../../constants/constants';
-
+import {
+  MDC_LAYOUT_GRID_CELL,
+  MDC_LAYOUT_GRID_CELL_SPAN_12,
+  MDC_TYPOGRAPHY,
+  MDC_TYPOGRAPHY_HEADLINE_2,
+} from '../../constants/constants';
 
 export default class ErrorMessage {
   constructor() {
@@ -12,13 +16,6 @@ export default class ErrorMessage {
   }
 
   render = (messageText) => {
-    const {
-      MDC_LAYOUT_GRID_CELL,
-      MDC_LAYOUT_GRID_CELL_SPAN_12,
-      MDC_TYPOGRAPHY,
-      MDC_TYPOGRAPHY_HEADLINE_2,
-    } = materialUiClasses;
-
     const articlesSection = document.querySelector('.articles');
     articlesSection.innerHTML = '';
     articlesSection.innerHTML = `

@@ -1,15 +1,13 @@
 import { MDCSelect } from '@material/select';
 
-import { errorMessages } from '../constants/constants';
-import { getListOfSources, getArticlesData } from '../services/data-service';
+import { ERROR_SOURCES, ERROR_ARTICLES, BASE_URL, API_KEY, GET } from '../constants/constants';
+import { getListOfSources, getArticlesData, fetchApiData } from '../services/data-service';
 import renderSourceSelector from './SourceSelector';
 import renderNewsList from './NewsList';
 import '../style/index.scss';
 
 export default class NewsApp {
   init = async () => {
-    const { ERROR_SOURCES } = errorMessages;
-
     try {
       this.sourceData = await this.getSourcesData().catch(console.log);
       renderSourceSelector(this.sourceData);
@@ -22,9 +20,20 @@ export default class NewsApp {
   }
 
   getSourcesData = async () => {
-    const sources = await getListOfSources();
+    const apiQuery = {
+      method: GET,
+      url: {
+        baseUrl: BASE_URL,
+        paths: ['/sources'],
+        params: {
+          apiKey: API_KEY,
+        },
+      }
+    }
 
-    return sources.reduce((result, { name, id }) => {
+    const data = await fetchApiData(apiQuery);
+
+    return data.sources.reduce((result, { name, id }) => {
       result[name] = id;
       return result;
     } , {});
@@ -36,21 +45,31 @@ export default class NewsApp {
   }
 
   sourceChangeHandler = async ({ detail: { value } }) => {
-    const { ERROR_ARTICLES } = errorMessages;
-
     if (this.currentSource === value) {
       return;
     }
 
     this.currentSource = value;
+    const articleId = this.sourceData[value];
 
     const articleSection = document.querySelector('.articles');
     articleSection.innerHTML = '';
-    const articleId = this.sourceData[value];
+
+    const apiQuery = {
+      method: GET,
+      url: {
+        baseUrl: BASE_URL,
+        paths: ['/articles'],
+        params: {
+          apiKey: API_KEY,
+          source: articleId,
+        },
+      },
+    }
 
     try {
-      const articlesData = await getArticlesData(articleId).catch(console.log);
-      renderNewsList(articlesData);
+      const data = await fetchApiData(apiQuery).catch(console.log);
+      renderNewsList(data.articles);
     } catch(err) {
       console.log(err);
       this.errorHandler(ERROR_ARTICLES);
@@ -58,7 +77,7 @@ export default class NewsApp {
   }
 
   errorHandler = (errorMessage) => {
-    import('./ErrorMessage/ErrorMessage').then(module => {
+    import(/* webpackChunkName: "error" */'./ErrorMessage/ErrorMessage').then(module => {
       const ErrorMessage = module.default;
       const err = new ErrorMessage();
       err.render(errorMessage);
