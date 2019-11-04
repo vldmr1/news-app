@@ -1,9 +1,7 @@
 import RequestFactory from './requests/RequestFactory';
-import urlBuilder from '../utils/url-builder';
 
-export const fetchApiData = async({ url, method }) => {
-  const urlString = urlBuilder(url);
-  const request = new RequestFactory().createRequest(urlString, method);
+export const fetchApiData = async(url, method) => {
+  const request = new RequestFactory().createRequest(url, method);
 
   const response = await fetch(...request);
   const data = await response.json();

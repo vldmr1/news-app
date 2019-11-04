@@ -1,4 +1,4 @@
-const urlBuilder = ({ baseUrl, paths, params }) => {
+const urlBuilder = (baseUrl, paths, params) => {
   const queryUrl = paths.reduce((url, path) => {
     return url + path;
   }, baseUrl);
