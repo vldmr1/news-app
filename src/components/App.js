@@ -1,9 +1,10 @@
 import { MDCSelect } from '@material/select';
 
 import { ERROR_SOURCES, ERROR_ARTICLES, BASE_URL, API_KEY, GET } from '../constants/constants';
-import { getListOfSources, getArticlesData, fetchApiData } from '../services/data-service';
+import { fetchApiData } from '../services/data-service';
 import renderSourceSelector from './SourceSelector';
 import renderNewsList from './NewsList';
+import urlBuilder from '../utils/url-builder';
 import '../style/index.scss';
 
 export default class NewsApp {
@@ -11,27 +12,17 @@ export default class NewsApp {
     try {
       this.sourceData = await this.getSourcesData().catch(console.log);
       renderSourceSelector(this.sourceData);
-    } catch {
+    } catch(err) {
+      console.log(err);
       this.errorHandler(ERROR_SOURCES);
-      return;
     }
 
     this.addSelectorListener();
   }
 
   getSourcesData = async () => {
-    const apiQuery = {
-      method: GET,
-      url: {
-        baseUrl: BASE_URL,
-        paths: ['/sources'],
-        params: {
-          apiKey: API_KEY,
-        },
-      }
-    }
-
-    const data = await fetchApiData(apiQuery);
+    const url = urlBuilder(BASE_URL, ['/sources'], {apiKey: API_KEY});
+    const data = await fetchApiData(url, GET);
 
     return data.sources.reduce((result, { name, id }) => {
       result[name] = id;
@@ -45,30 +36,20 @@ export default class NewsApp {
   }
 
   sourceChangeHandler = async ({ detail: { value } }) => {
-    if (this.currentSource === value) {
+    if (this.currentSourceName === value) {
       return;
     }
 
-    this.currentSource = value;
+    this.currentSourceName = value;
     const articleId = this.sourceData[value];
 
     const articleSection = document.querySelector('.articles');
     articleSection.innerHTML = '';
 
-    const apiQuery = {
-      method: GET,
-      url: {
-        baseUrl: BASE_URL,
-        paths: ['/articles'],
-        params: {
-          apiKey: API_KEY,
-          source: articleId,
-        },
-      },
-    }
+    const url = urlBuilder(BASE_URL, ['/articles'], {apiKey: API_KEY, source: articleId});
 
     try {
-      const data = await fetchApiData(apiQuery).catch(console.log);
+      const data = await fetchApiData(url, GET).catch(console.log);
       renderNewsList(data.articles);
     } catch(err) {
       console.log(err);
