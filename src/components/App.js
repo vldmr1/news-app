@@ -1,9 +1,9 @@
 import { MDCSelect } from '@material/select';
 
 import { ERROR_SOURCES, ERROR_ARTICLES, BASE_URL, API_KEY, GET } from '../constants/constants';
-import { fetchApiData } from '../services/data-service';
-import renderSourceSelector from './SourceSelector';
-import renderNewsList from './NewsList';
+import { fetchApiData } from '../services/data-service/data-service';
+import renderSourceSelector from './SourceSelector/SourceSelector';
+import renderNewsList from './NewsList/NewsList';
 import urlBuilder from '../utils/url-builder';
 import '../style/index.scss';
 

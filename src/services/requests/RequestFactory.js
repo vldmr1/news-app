@@ -1,5 +1,5 @@
 import Request from './Request';
-import { GET, PUT, POST, DELETE } from '../../constants/constants';
+import { GET, PUT, POST, DELETE, CORS, NO_CACHE } from '../../constants/constants';
 
 export default class RequestFactory {
   createRequest = (url, method, mode, cache) => {
@@ -7,7 +7,7 @@ export default class RequestFactory {
 
     switch (method) {
       case GET:
-        request = new Request(url, GET, 'cors', 'no-cache');
+        request = new Request(url, GET, CORS, NO_CACHE);
         break;
       case PUT:
         request = new Request(url, PUT, mode, cache);
