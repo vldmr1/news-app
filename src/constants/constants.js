@@ -5,6 +5,9 @@ export const GET = 'GET';
 export const PUT = 'PUT';
 export const POST = 'POST';
 export const DELETE = 'DELETE';
+export const CORS = 'cors';
+export const DEFAULT = 'default';
+export const NO_CACHE = 'no-cache';
 
 // MaterialUI Class Names
 export const MDC_LIST_ITEM = 'mdc-list-item';

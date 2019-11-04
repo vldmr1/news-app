@@ -1,4 +1,4 @@
-import { MDC_LIST_ITEM, MDC_TYPOGRAPHY, MDC_TYPOGRAPHY_HEADLINE_5 } from '../constants/constants'
+import { MDC_LIST_ITEM, MDC_TYPOGRAPHY, MDC_TYPOGRAPHY_HEADLINE_5 } from '../../constants/constants'
 
 const renderSourceSelector = (sourceData) => {
   const sourceDropDown = document.querySelector('.source-selector');

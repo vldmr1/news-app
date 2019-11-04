@@ -1,4 +1,4 @@
-import renderNewsCard from "./NewsCard/NewsCard";
+import renderNewsCard from "../NewsCard/NewsCard";
 
 const renderNewsList = (articlesData) => {
   const articleSection = document.querySelector('.articles');
